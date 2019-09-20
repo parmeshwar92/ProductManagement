@@ -1,2 +1,0 @@
-# ProductManagement
-Created with CodeSandbox
