@@ -3,13 +3,14 @@ import { Table } from "react-bootstrap";
 import "./styles.css";
 import { Link } from "react-router-dom";
 class AddItem extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       id: "",
       name: "",
       description: "",
-      price: ""
+      price: "",
+      items: []
     };
     this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
