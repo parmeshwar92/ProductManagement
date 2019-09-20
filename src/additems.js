@@ -39,18 +39,7 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.addproduct(
-      this.state.id,
-      this.state.name,
-      this.state.description,
-      this.state.price
-    );
-    this.setState({
-      id: "",
-      name: "",
-      description: "",
-      price: ""
-    });
+    this.props.filterUser(this.state.id);
   }
   render() {
     const submitbuttonstyle = {
