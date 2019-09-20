@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import "./styles.css";
 import { Link } from "react-router-dom";
 class AddItem extends React.Component {
@@ -39,7 +39,8 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    console.log(JSON.stringify(this.state));
+    this.props.filterUser();
+
     this.setState({
       id: "",
       name: "",
@@ -75,11 +76,9 @@ class AddItem extends React.Component {
             <tbody>
               <tr>
                 <td>
-                  {" "}
                   <label>ID: </label>
                 </td>
                 <td>
-                  {" "}
                   <input
                     type="text"
                     value={this.state.id}
@@ -90,7 +89,6 @@ class AddItem extends React.Component {
 
               <tr>
                 <td>
-                  {" "}
                   <label> Name: </label>
                 </td>
                 <td>
@@ -107,7 +105,6 @@ class AddItem extends React.Component {
                   <label>Description: </label>
                 </td>
                 <td>
-                  {" "}
                   <input
                     type="text"
                     value={this.state.description}
