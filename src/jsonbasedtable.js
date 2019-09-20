@@ -27,8 +27,8 @@ class DataTables extends React.Component {
   getEployees() {
     return this.state.employees;
   }
-  addproduct() {
-    alert("hello");
+  addproduct(id, name, description, price) {
+    alert("hello", id, name, description, price);
   }
 
   componentDidMount() {
