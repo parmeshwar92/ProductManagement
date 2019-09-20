@@ -39,8 +39,12 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.filterUser();
-
+    this.props.addproduct(
+      this.state.id,
+      this.state.name,
+      this.state.description,
+      this.state.price
+    );
     this.setState({
       id: "",
       name: "",

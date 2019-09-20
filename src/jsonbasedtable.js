@@ -9,7 +9,7 @@ class DataTables extends React.Component {
   constructor(props) {
     super(props);
     this.deleteRow = this.deleteRow.bind(this);
-    this.filterUser = this.filterUser.bind(this);
+    this.addproduct = this.addproduct.bind(this);
     this.state = {
       selected: -1,
       employees: []
@@ -27,7 +27,7 @@ class DataTables extends React.Component {
   getEployees() {
     return this.state.employees;
   }
-  filterUser() {
+  addproduct() {
     alert("hello");
   }
 
@@ -159,7 +159,7 @@ class DataTables extends React.Component {
         <Link to="/additem" className="nav-link">
           AddProduct
         </Link>
-        <AddItem filterUser={this.filterUser} />
+        <AddItem addproduct={this.addproduct} />
       </div>
     );
   }
