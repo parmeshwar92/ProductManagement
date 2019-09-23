@@ -3,14 +3,13 @@ import { Table } from "react-bootstrap";
 import "./styles.css";
 import { Link } from "react-router-dom";
 class AddItem extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       id: "",
       name: "",
       description: "",
-      price: "",
-      items: []
+      price: ""
     };
     this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
@@ -23,6 +22,7 @@ class AddItem extends React.Component {
       id: event.target.value
     });
   }
+
   onChangeItemName(event) {
     this.setState({
       name: event.target.value
@@ -40,7 +40,16 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.filterUser(this.state.id);
+    this.props.addProduct(
+      this.state.id,
+      this.state.name,
+      this.state.description,
+      this.state.price
+    );
+    this.state.id = "";
+    this.state.name = "";
+    this.state.description = "";
+    this.state.price = "";
   }
   render() {
     const submitbuttonstyle = {
@@ -61,10 +70,10 @@ class AddItem extends React.Component {
       borderBottomLeftRadius: 7,
       borderBottomRightRadius: 7
     };
+
     return (
       <div className="App">
         <h1>Add New Product</h1>
-
         <form onSubmit={this.onSubmit}>
           <Table width="300px" height="200px" align="center">
             <tbody>
@@ -85,6 +94,7 @@ class AddItem extends React.Component {
                 <td>
                   <label> Name: </label>
                 </td>
+
                 <td>
                   <input
                     type="text"
@@ -98,6 +108,7 @@ class AddItem extends React.Component {
                 <td>
                   <label>Description: </label>
                 </td>
+
                 <td>
                   <input
                     type="text"
@@ -111,6 +122,7 @@ class AddItem extends React.Component {
                 <td>
                   <label>Price </label>
                 </td>
+
                 <td>
                   <input
                     type="text"
@@ -119,6 +131,7 @@ class AddItem extends React.Component {
                   />
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <input
@@ -128,6 +141,7 @@ class AddItem extends React.Component {
                     style={submitbuttonstyle}
                   />
                 </td>
+
                 <td>
                   <Link to="/" className="nav-link">
                     {" "}
