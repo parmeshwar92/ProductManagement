@@ -4,19 +4,34 @@ import "react-table/react-table.css";
 import tabledata from "./tablejsondata";
 import { Link } from "react-router-dom";
 import AddItem from "./additems";
+import EditItem from './edititem';
 
 class DataTables extends React.Component {
   constructor(props) {
     super(props);
     this.deleteRow = this.deleteRow.bind(this);
     this.addProduct = this.addProduct.bind(this);
-
+    this.editItems = this.editItems.bind(this);
+    this.addProductClick= this.addProductClick.bind(this);
     this.state = {
       selected: -1,
+      editOperation:false,
+      addOperation:false,
       products: []
     };
   }
+  addProductClick(){
+    this.setState({
+      addOperation:!this.state.addOperation
+    });
+  }
 
+  editItems(props){
+  console.log(props.original.id);
+  this.setState({
+    editOperation:!this.state.editOperation
+  });
+  }
   deleteRow(id) {
     let items = this.state.products;
     let index = items.findIndex(dataid => {
@@ -95,7 +110,12 @@ class DataTables extends React.Component {
         Cell: props => {
           return (
             <div>
-              <button style={edbuttonstyle}>Edit</button>{" "}
+              <button 
+               onClick = {()=>this.editItems(props)}
+               style={edbuttonstyle}>Edit</button>
+               {
+                 this.state.editOperation
+               ?<EditItem id={this.props.id}/>:null}
               <button
                 onClick={() => this.deleteRow(props.original.id)}
                 style={delbuttonstyle}
@@ -165,10 +185,10 @@ class DataTables extends React.Component {
             }}
           />
         </div>
-        <Link to="/additems" className="nav-link">
-          AddProduct
-        </Link>
-        <AddItem addProduct={this.addProduct} />
+
+        <button onClick = {()=>this.addProductClick()} style={edbuttonstyle}> Add Product </button>
+        {this.state.addOperation?<AddItem addProduct={this.addProduct} />:null}
+        
       </div>
     );
   }
