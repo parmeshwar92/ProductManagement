@@ -9,31 +9,40 @@ class DataTables extends React.Component {
   constructor(props) {
     super(props);
     this.deleteRow = this.deleteRow.bind(this);
-    this.filterUser = this.filterUser.bind(this);
+    this.addProduct = this.addProduct.bind(this);
+
     this.state = {
       selected: -1,
-      employees: []
+      products: []
     };
   }
 
   deleteRow(id) {
-    let items = this.state.employees;
+    let items = this.state.products;
     let index = items.findIndex(dataid => {
       return dataid.id === id;
     });
     items.splice(index, 1);
     this.setState({ employees: items });
   }
-  getEployees() {
-    return this.state.employees;
+  getproducts() {
+    return this.state.products;
   }
-  filterUser(id) {
-    alert("hello:::", id);
+  addProduct(id, name, description, price) {
+    const products = this.getproducts();
+    products.push({
+      id,
+      name,
+      description,
+      price
+    });
+    this.setState({ products});
+    console.log("items", products);
   }
 
   componentDidMount() {
     this.setState({
-      employees: tabledata.data
+      products: tabledata.data
     });
   }
   render() {
@@ -114,7 +123,7 @@ class DataTables extends React.Component {
         <div style={style}>
           <ReactTable
             columns={columns}
-            data={this.state.employees}
+            data={this.state.products}
             minRows={5}
             defaultPageSize={5}
             noDataText="please wait..."
@@ -156,10 +165,10 @@ class DataTables extends React.Component {
             }}
           />
         </div>
-        <Link to="/additem" className="nav-link">
+        <Link to="/additems" className="nav-link">
           AddProduct
         </Link>
-        <AddItem filterUser={this.filterUser} />
+        <AddItem addProduct={this.addProduct} />
       </div>
     );
   }
