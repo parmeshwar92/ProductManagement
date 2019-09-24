@@ -2,9 +2,8 @@ import React from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import tabledata from "./tablejsondata";
-import { Link } from "react-router-dom";
 import AddItem from "./additems";
-import EditItem from './edititem';
+import EditItem from "./edititem";
 
 class DataTables extends React.Component {
   constructor(props) {
@@ -12,25 +11,53 @@ class DataTables extends React.Component {
     this.deleteRow = this.deleteRow.bind(this);
     this.addProduct = this.addProduct.bind(this);
     this.editItems = this.editItems.bind(this);
-    this.addProductClick= this.addProductClick.bind(this);
+    this.addProductClick = this.addProductClick.bind(this);
+    this.updateProducts=this.updateProducts.bind(this);
     this.state = {
       selected: -1,
-      editOperation:false,
-      addOperation:false,
-      products: []
+      editOperation: false,
+      addOperation: false,
+      products: [],
+      id: "",
+      name: "",
+      description: "",
+      price: ""
     };
   }
-  addProductClick(){
+  addProductClick() {
     this.setState({
-      addOperation:!this.state.addOperation
+      addOperation: !this.state.addOperation
     });
   }
 
-  editItems(props){
-  console.log(props.original.id);
-  this.setState({
-    editOperation:!this.state.editOperation
+  editItems(props) {
+    this.setState({
+      editOperation: !this.state.editOperation
+    });
+    this.setState({
+      id: props.original.id,
+      name: props.original.name,
+      description: props.original.description,
+      price: props.original.price
+    });
+  }
+  updateProducts(id,name,description,price){
+    alert(description);
+   let products = this.getproducts();
+   products = products.map(product => {
+    if(product.id === id && product.name  === name){
+      product.description = description;
+      product.price= price;
+     }
+     return product
+   });
+   this.setState({products});
+   this.setState({
+    addOperation: true
   });
+  
+   
+   console.log(products);
   }
   deleteRow(id) {
     let items = this.state.products;
@@ -51,7 +78,7 @@ class DataTables extends React.Component {
       description,
       price
     });
-    this.setState({ products});
+    this.setState({ products });
     console.log("items", products);
   }
 
@@ -110,12 +137,12 @@ class DataTables extends React.Component {
         Cell: props => {
           return (
             <div>
-              <button 
-               onClick = {()=>this.editItems(props)}
-               style={edbuttonstyle}>Edit</button>
-               {
-                 this.state.editOperation
-               ?<EditItem id={this.props.id}/>:null}
+              <button
+                onClick={() => this.editItems(props)}
+                style={edbuttonstyle}
+              >
+                Edit
+              </button>
               <button
                 onClick={() => this.deleteRow(props.original.id)}
                 style={delbuttonstyle}
@@ -186,9 +213,21 @@ class DataTables extends React.Component {
           />
         </div>
 
-        <button onClick = {()=>this.addProductClick()} style={edbuttonstyle}> Add Product </button>
-        {this.state.addOperation?<AddItem addProduct={this.addProduct} />:null}
-        
+        <button onClick={() => this.addProductClick()} style={edbuttonstyle}>
+          Add Product
+        </button>
+        {this.state.addOperation ? (
+          <AddItem addProduct={this.addProduct} />
+        ) : null}
+        {this.state.editOperation ? (
+          <EditItem
+            id={this.state.id}
+            name={this.state.name}
+            description={this.state.description}
+            price={this.state.price}
+            updateProducts={this.updateProducts}
+          />
+        ) : null}
       </div>
     );
   }
