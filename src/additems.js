@@ -46,10 +46,13 @@ class AddItem extends React.Component {
       this.state.description,
       this.state.price
     );
-    this.state.id = "";
-    this.state.name = "";
-    this.state.description = "";
-    this.state.price = "";
+    this.setState({
+      id :"",
+      name :"",
+      description : "",
+      price : ""
+    });
+    
   }
   render() {
     const submitbuttonstyle = {
