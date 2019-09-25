@@ -3,12 +3,25 @@ import { Table } from "react-bootstrap";
 class EditItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: "" };
+    this.state = {
+      id: "",
+      name: "",
+      description: "",
+      price: ""
+    };
     this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
     this.onChangeItemdescription = this.onChangeItemdescription.bind(this);
     this.onChangeItemprice = this.onChangeItemprice.bind(this);
     this.onEditSubmit = this.onEditSubmit.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+  }
+  componentDidMount() {
+    this.setState({
+      name:this.props.name,
+      description:this.props.description,
+      price:this.props.price
+    });
   }
   onChangeItemId(event) {
     this.setState({
@@ -32,10 +45,18 @@ class EditItem extends React.Component {
     });
   }
   onEditSubmit(event) {
-    this.props.updateProducts(this.props.id,this.props.name,this.state.description,this.state.price);
-    
-    
     event.preventDefault();
+    this.props.updateProducts(
+      this.props.id,
+      this.state.name,
+      this.state.description,
+      this.state.price
+    );
+
+   
+  }
+  onCancel() {
+    this.props.canceFunc();
   }
 
   render() {
@@ -72,7 +93,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      defaultValue={this.props.id}
+                      value ={this.props.id}
                       onChange={this.onChangeItemId}
                     />
                   </td>
@@ -86,7 +107,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      defaultValue={this.props.name}
+                      value ={this.state.name}
                       onChange={this.onChangeItemName}
                     />
                   </td>
@@ -100,7 +121,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      defaultValue={this.props.description}
+                      value={this.state.description}
                       onChange={this.onChangeItemdescription}
                     />
                   </td>
@@ -114,7 +135,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      defaultValue={this.props.price}
+                      value={this.state.price}
                       onChange={this.onChangeItemprice}
                     />
                   </td>
@@ -124,7 +145,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="submit"
-                      value="submit"
+                      value="update"
                       className="btn btn-primary"
                       style={submitbuttonstyle}
                     />
@@ -132,10 +153,11 @@ class EditItem extends React.Component {
 
                   <td>
                     <input
-                      type="submit"
+                      type="button"
                       value="cancel"
                       className="btn btn-primary"
                       style={cancelbuttonstyle}
+                      onClick={this.onCancel}
                     />
                   </td>
                 </tr>
