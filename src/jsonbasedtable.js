@@ -82,8 +82,6 @@ class DataTables extends React.Component {
       price
     });
     this.setState({ products, isAdd: false });
-
-    console.log("items", products);
   }
 
   canceFunc() {
@@ -209,7 +207,11 @@ class DataTables extends React.Component {
           Add Product
         </button>
         {this.state.isAdd ? (
-          <AddItem addProduct={this.addProduct} canceFunc={this.canceFunc} />
+          <AddItem
+            products={this.state.products}
+            addProduct={this.addProduct}
+            canceFunc={this.canceFunc}
+          />
         ) : null}
         {this.state.isEdit ? (
           <EditItem
