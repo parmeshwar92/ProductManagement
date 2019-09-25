@@ -45,3 +45,17 @@
   padding: 8px;
   height: 30px;
 }
+.submitbutton {
+  background: rgb(62, 149, 231);
+  width: 70%;
+  border-radius: 10px;
+  padding: 8px;
+  height: 30px;
+}
+.cancelbutton {
+  width: 40%;
+  border-radius: 10px;
+  background: rgb(226, 211, 76);
+  padding: 8px;
+  height: 30px;
+}
