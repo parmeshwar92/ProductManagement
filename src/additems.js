@@ -8,7 +8,8 @@ class AddItem extends React.Component {
       id: "",
       name: "",
       description: "",
-      price: ""
+      price: "",
+      flag: false
     };
     this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
@@ -40,15 +41,29 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    if (this.state.id !== "") {
+    const products = this.props.products;
+    products.map(product => {
+      console.log(product.id, " _ ", this.state.id);
+      if (product.id !== this.state.id) {
+        this.setState({
+          flag: true
+        });
+        console.log(this.state.flag);
+      }
+
+      return product;
+    });
+
+    if (this.state.id !== null && !this.state.flag) {
       this.props.addProduct(
         this.state.id,
         this.state.name,
         this.state.description,
         this.state.price
       );
+    } else if (this.state.id === null) {
+      alert("please enter product id..");
     } else {
-      alert("id is mandatory field..");
       this.setState({
         id: "",
         name: "",
