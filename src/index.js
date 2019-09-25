@@ -7,9 +7,6 @@ import AddItem from "./additems";
 
 class App extends React.Component {
   render() {
-    const colorconst = {
-      color: "#23985d"
-    };
     return (
       <div className="App">
         <Router>
