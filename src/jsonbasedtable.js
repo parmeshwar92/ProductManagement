@@ -12,11 +12,12 @@ class DataTables extends React.Component {
     this.addProduct = this.addProduct.bind(this);
     this.editItems = this.editItems.bind(this);
     this.addProductClick = this.addProductClick.bind(this);
-    this.updateProducts=this.updateProducts.bind(this);
+    this.updateProducts = this.updateProducts.bind(this);
+    this.canceFunc = this.canceFunc.bind(this);
     this.state = {
       selected: -1,
-      editOperation: false,
-      addOperation: false,
+      isEdit: false,
+      isAdd: false,
       products: [],
       id: "",
       name: "",
@@ -24,15 +25,21 @@ class DataTables extends React.Component {
       price: ""
     };
   }
+  componentDidMount() {
+    this.setState({
+      products: tabledata.data
+    });
+  }
+
   addProductClick() {
     this.setState({
-      addOperation: !this.state.addOperation
+      isAdd: !this.state.isAdd
     });
   }
 
   editItems(props) {
     this.setState({
-      editOperation: !this.state.editOperation
+      isEdit: !this.state.isEdit
     });
     this.setState({
       id: props.original.id,
@@ -41,23 +48,18 @@ class DataTables extends React.Component {
       price: props.original.price
     });
   }
-  updateProducts(id,name,description,price){
-    alert(description);
-   let products = this.getproducts();
-   products = products.map(product => {
-    if(product.id === id && product.name  === name){
-      product.description = description;
-      product.price= price;
-     }
-     return product
-   });
-   this.setState({products});
-   this.setState({
-    addOperation: true
-  });
-  
-   
-   console.log(products);
+  updateProducts(id, name, description, price) {
+    let products = this.getproducts();
+    products = products.map(product => {
+      if (product.id === id) {
+        product.name = name;
+        product.description = description;
+        product.price = price;
+      }
+      return product;
+    });
+    this.setState({ products, isEdit: false });
+    console.log(products);
   }
   deleteRow(id) {
     let items = this.state.products;
@@ -78,13 +80,15 @@ class DataTables extends React.Component {
       description,
       price
     });
-    this.setState({ products });
+    this.setState({ products, isAdd: false });
+
     console.log("items", products);
   }
 
-  componentDidMount() {
+  canceFunc() {
     this.setState({
-      products: tabledata.data
+      isEdit: false,
+      isAdd: false
     });
   }
   render() {
@@ -216,16 +220,18 @@ class DataTables extends React.Component {
         <button onClick={() => this.addProductClick()} style={edbuttonstyle}>
           Add Product
         </button>
-        {this.state.addOperation ? (
-          <AddItem addProduct={this.addProduct} />
+        {this.state.isAdd ? (
+          <AddItem addProduct={this.addProduct} canceFunc={this.canceFunc} />
         ) : null}
-        {this.state.editOperation ? (
+        {this.state.isEdit ? (
           <EditItem
             id={this.state.id}
             name={this.state.name}
             description={this.state.description}
             price={this.state.price}
             updateProducts={this.updateProducts}
+            canceFunc={this.canceFunc}
+            isEdit={this.state.isEdit}
           />
         ) : null}
       </div>
