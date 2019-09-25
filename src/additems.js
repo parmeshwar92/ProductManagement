@@ -15,7 +15,7 @@ class AddItem extends React.Component {
     this.onChangeItemdescription = this.onChangeItemdescription.bind(this);
     this.onChangeItemprice = this.onChangeItemprice.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onCancel=this.onCancel.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
   onChangeItemId(event) {
     this.setState({
@@ -40,25 +40,28 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    this.props.addProduct(
-      this.state.id,
-      this.state.name,
-      this.state.description,
-      this.state.price
-    );
-    this.setState({
-      id :"",
-      name :"",
-      description : "",
-      price : ""
-    });
-    
+    if (this.state.id !== "") {
+      this.props.addProduct(
+        this.state.id,
+        this.state.name,
+        this.state.description,
+        this.state.price
+      );
+    } else {
+      alert("id is mandatory field..");
+      this.setState({
+        id: "",
+        name: "",
+        description: "",
+        price: ""
+      });
+    }
   }
-  onCancel(){
-  this.props.canceFunc();
+  onCancel() {
+    this.props.canceFunc();
   }
   render() {
-    const submitbuttonstyle = {
+    /*const submitbuttonstyle = {
       backgroundColor: "#03A9F4",
       width: 90,
       height: 40,
@@ -75,7 +78,7 @@ class AddItem extends React.Component {
       borderTopRightRadius: 7,
       borderBottomLeftRadius: 7,
       borderBottomRightRadius: 7
-    };
+    };*/
 
     return (
       <div className="App">
@@ -143,19 +146,17 @@ class AddItem extends React.Component {
                   <input
                     type="submit"
                     value="submit"
-                    className="btn btn-primary"
-                    style={submitbuttonstyle}
+                    className="submitbutton"
                   />
                 </td>
 
                 <td>
-                    <input
-                      type="submit"
-                      value="cancel" 
-                      className="btn btn-primary"
-                      style={cancelbuttonstyle}
-                      onClick ={this.onCancel}
-                    />
+                  <input
+                    type="submit"
+                    value="cancel"
+                    className="cancelbutton"
+                    onClick={this.onCancel}
+                  />
                 </td>
               </tr>
             </tbody>
