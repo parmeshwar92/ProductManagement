@@ -1,6 +1,7 @@
 import React from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import "./styles.css";
 import tabledata from "./tablejsondata";
 import AddItem from "./additems";
 import EditItem from "./edititem";
@@ -92,22 +93,6 @@ class DataTables extends React.Component {
     });
   }
   render() {
-    const delbuttonstyle = {
-      backgroundColor: "#F44336",
-      width: 80,
-      borderTopLeftRadius: 7,
-      borderTopRightRadius: 7,
-      borderBottomLeftRadius: 7,
-      borderBottomRightRadius: 7
-    };
-    const edbuttonstyle = {
-      backgroundColor: "#03A9F4",
-      width: 70,
-      borderTopLeftRadius: 7,
-      borderTopRightRadius: 7,
-      borderBottomLeftRadius: 7,
-      borderBottomRightRadius: 7
-    };
     const columns = [
       {
         Header: "ID",
@@ -143,13 +128,13 @@ class DataTables extends React.Component {
             <div>
               <button
                 onClick={() => this.editItems(props)}
-                style={edbuttonstyle}
+                className="editbutton"
               >
                 Edit
               </button>
               <button
                 onClick={() => this.deleteRow(props.original.id)}
-                style={delbuttonstyle}
+                className="deletebutton"
               >
                 Delete
               </button>
@@ -217,7 +202,10 @@ class DataTables extends React.Component {
           />
         </div>
 
-        <button onClick={() => this.addProductClick()} style={edbuttonstyle}>
+        <button
+          onClick={() => this.addProductClick()}
+          className="addProductstyle"
+        >
           Add Product
         </button>
         {this.state.isAdd ? (
