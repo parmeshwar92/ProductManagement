@@ -18,9 +18,9 @@ class EditItem extends React.Component {
   }
   componentDidMount() {
     this.setState({
-      name:this.props.name,
-      description:this.props.description,
-      price:this.props.price
+      name: this.props.name,
+      description: this.props.description,
+      price: this.props.price
     });
   }
   onChangeItemId(event) {
@@ -52,8 +52,6 @@ class EditItem extends React.Component {
       this.state.description,
       this.state.price
     );
-
-   
   }
   onCancel() {
     this.props.canceFunc();
@@ -93,7 +91,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      value ={this.props.id}
+                      value={this.props.id}
                       onChange={this.onChangeItemId}
                     />
                   </td>
@@ -107,7 +105,7 @@ class EditItem extends React.Component {
                   <td>
                     <input
                       type="text"
-                      value ={this.state.name}
+                      value={this.state.name}
                       onChange={this.onChangeItemName}
                     />
                   </td>
