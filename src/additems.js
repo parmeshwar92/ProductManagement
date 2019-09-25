@@ -1,7 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./styles.css";
-import { Link } from "react-router-dom";
 class AddItem extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +15,7 @@ class AddItem extends React.Component {
     this.onChangeItemdescription = this.onChangeItemdescription.bind(this);
     this.onChangeItemprice = this.onChangeItemprice.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onCancel=this.onCancel.bind(this);
   }
   onChangeItemId(event) {
     this.setState({
@@ -53,6 +53,9 @@ class AddItem extends React.Component {
       price : ""
     });
     
+  }
+  onCancel(){
+  this.props.canceFunc();
   }
   render() {
     const submitbuttonstyle = {
@@ -146,15 +149,13 @@ class AddItem extends React.Component {
                 </td>
 
                 <td>
-                  <Link to="/" className="nav-link">
-                    {" "}
                     <input
                       type="submit"
-                      value="cancel"
+                      value="cancel" 
                       className="btn btn-primary"
                       style={cancelbuttonstyle}
+                      onClick ={this.onCancel}
                     />
-                  </Link>
                 </td>
               </tr>
             </tbody>
