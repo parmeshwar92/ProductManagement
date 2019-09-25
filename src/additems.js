@@ -41,29 +41,15 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    const products = this.props.products;
-    products.map(product => {
-      console.log(product.id, " _ ", this.state.id);
-      if (product.id !== this.state.id) {
-        this.setState({
-          flag: true
-        });
-        console.log(this.state.flag);
-      }
-
-      return product;
-    });
-
-    if (this.state.id !== null && !this.state.flag) {
+    if (this.state.id !== "" && this.state.id !== null) {
       this.props.addProduct(
         this.state.id,
         this.state.name,
         this.state.description,
         this.state.price
       );
-    } else if (this.state.id === null) {
-      alert("please enter product id..");
     } else {
+      alert("please enter valid id.");
       this.setState({
         id: "",
         name: "",
