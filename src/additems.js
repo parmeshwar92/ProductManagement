@@ -9,8 +9,9 @@ class AddItem extends React.Component {
       name: "",
       description: "",
       price: "",
-      flag: false
+      alert: false
     };
+
     this.onChangeItemId = this.onChangeItemId.bind(this);
     this.onChangeItemName = this.onChangeItemName.bind(this);
     this.onChangeItemdescription = this.onChangeItemdescription.bind(this);
@@ -41,7 +42,13 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
-    if (this.state.id !== "" && this.state.id !== null) {
+    let flag = this.props.products.map(product => {
+      if (product.id === this.state.id) {
+        return true;
+      }
+      return product;
+    });
+    if (!flag) {
       this.props.addProduct(
         this.state.id,
         this.state.name,
@@ -49,12 +56,13 @@ class AddItem extends React.Component {
         this.state.price
       );
     } else {
-      alert("please enter valid id.");
+      alert("please enter unique id");
       this.setState({
         id: "",
         name: "",
         description: "",
-        price: ""
+        price: "",
+        alert: true
       });
     }
   }
