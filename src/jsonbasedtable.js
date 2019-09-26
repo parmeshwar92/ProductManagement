@@ -68,7 +68,7 @@ class DataTables extends React.Component {
       return dataid.id === id;
     });
     items.splice(index, 1);
-    this.setState({ employees: items });
+    this.setState({ products: items });
   }
   getproducts() {
     return this.state.products;
