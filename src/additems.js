@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import "./styles.css";
+
 class AddItem extends React.Component {
   constructor(props) {
     super(props);
@@ -56,13 +57,11 @@ class AddItem extends React.Component {
         this.state.price
       );
     } else {
-      alert("please enter unique id");
       this.setState({
         id: "",
         name: "",
         description: "",
-        price: "",
-        alert: true
+        price: ""
       });
     }
   }
