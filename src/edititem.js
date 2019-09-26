@@ -107,6 +107,8 @@ class EditItem extends React.Component {
                       type="text"
                       value={this.state.name}
                       onChange={this.onChangeItemName}
+                      required
+                      pattern="^[a-zA-Z0-9]*$"
                     />
                   </td>
                 </tr>
