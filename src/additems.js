@@ -96,6 +96,8 @@ class AddItem extends React.Component {
                     type="text"
                     value={this.state.id}
                     onChange={this.onChangeItemId}
+                    pattern="(/^\S*$/)"
+                    required
                   />
                 </td>
               </tr>
@@ -110,6 +112,8 @@ class AddItem extends React.Component {
                     type="text"
                     value={this.state.name}
                     onChange={this.onChangeItemName}
+                    pattern="(/^\S*$/)"
+                    required
                   />
                 </td>
               </tr>
