@@ -96,7 +96,7 @@ class AddItem extends React.Component {
                     type="text"
                     value={this.state.id}
                     onChange={this.onChangeItemId}
-                    pattern="(/^\S*$/)"
+                    pattern="^[0-9]{0,}$"
                     required
                   />
                 </td>
