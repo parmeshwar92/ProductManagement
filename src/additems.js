@@ -112,7 +112,7 @@ class AddItem extends React.Component {
                     type="text"
                     value={this.state.name}
                     onChange={this.onChangeItemName}
-                    pattern="(/^\S*$/)"
+                    pattern="^[a-zA-Z0-9]*$"
                     required
                   />
                 </td>
