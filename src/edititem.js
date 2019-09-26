@@ -1,5 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
+import "./styles.css";
+
 class EditItem extends React.Component {
   constructor(props) {
     super(props);
