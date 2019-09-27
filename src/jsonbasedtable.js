@@ -60,7 +60,6 @@ class DataTables extends React.Component {
       return product;
     });
     this.setState({ products, isEdit: false });
-    console.log(products);
   }
   deleteRow(id) {
     let items = this.state.products;
