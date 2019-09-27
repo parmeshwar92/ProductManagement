@@ -9,8 +9,7 @@ class AddItem extends React.Component {
       id: "",
       name: "",
       description: "",
-      price: "",
-      flag: false
+      price: ""
     };
 
     this.onChangeItemId = this.onChangeItemId.bind(this);
@@ -43,28 +42,31 @@ class AddItem extends React.Component {
   }
   onSubmit(event) {
     event.preventDefault();
+    let flag = false;
     const products = this.props.products;
-    let flags = products.map(product => {
-      console.log(product.id, this.state.id);
-      if (product.id === this.state.id) {
-        return true;
+    products.map(product => {
+      if (product.id.toString() === this.state.id) {
+        flag = true;
       }
-      return false;
+      return product;
     });
-    console.log(flags);
-    this.props.addProduct(
-      this.state.id,
-      this.state.name,
-      this.state.description,
-      this.state.price
-    );
-
-    this.setState({
-      id: "",
-      name: "",
-      description: "",
-      price: ""
-    });
+    if (!flag) {
+      this.props.addProduct(
+        this.state.id,
+        this.state.name,
+        this.state.description,
+        this.state.price
+      );
+      flag = false;
+    } else {
+      alert("please enter unique id.");
+      this.setState({
+        id: "",
+        name: "",
+        description: "",
+        price: ""
+      });
+    }
   }
   onCancel() {
     this.props.canceFunc();
