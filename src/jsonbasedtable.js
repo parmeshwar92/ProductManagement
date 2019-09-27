@@ -26,7 +26,7 @@ class DataTables extends React.Component {
       price: ""
     };
   }
-  componentDidMount() {
+ async componentDidMount() {
     this.setState({
       products: tabledata.data
     });
